@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Love Message</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      overflow: hidden;
+    }
+    .heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: pink;
+  transform: rotate(45deg);
+  animation: floatUp 4s linear forwards;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: pink;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: 0;
+    opacity: 1;
+  }
+  100% {
+    bottom: 100vh;
+    opacity: 0;
+    transform: translateX(50px) rotate(720deg);
+  }
+}
+
+    .popup {
+  position: absolute;
+  animation: fadeOut 10s ease forwards;
+  border-radius: 8px;
+}
+
+    .popup {
+      position: absolute;
+      padding: 10px 20px;
+      background-color: #F8C7DA;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-weight: bold;
+      font-size: 18px;
+      color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px pink;
+      animation: fadeOut 10s ease forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+
+    .dialog {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #F8C7DA;
+      padding: 20px;
+      border-radius: 10px;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-size: 24px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 0 15px pink;
+      z-index: 1000;
+      max-width: 80%;
+      box-sizing: border-box;
+    }
+
+    /* Media Queries cho màn hình nhỏ */
+    @media screen and (max-width: 600px) {
+      .popup {
+        padding: 8px 12px;
+        font-size: 14px;
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .dialog {
+        padding: 15px;
+        font-size: 18px;
+        max-width: 90%;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      .popup {
+        padding: 6px 10px;
+        font-size: 12px;
+        max-width: 120px;
+      }
+
+      .dialog {
+        padding: 10px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="startDialog" class="dialog">Click on the screen, my dear malak</div>
+  <div id="finalMessage" class="dialog" style="display: none;">
+  شكراً لأنك في حياتي. ممتن جدًا للتعرف عليك. أنتِ شخص مميز ولطيف جدًا 💖
+</div>
+
+  <audio id="backgroundMusic" src="assets/music.mp3" loop></audio>
+
+<script>
+  const messages = ["I Miss You !"];
+  const colors = ["white"];
+  const dialog = document.getElementById("startDialog");
+  const audio = document.getElementById("backgroundMusic");
+
+  function createPopup() {
+  const popup = document.createElement("img");
+  popup.className = "popup";
+  
+  // اختر صورة عشوائية من القائمة
+  const images = ["heart.png.jpg","flower.gif.jpg","love1.png.jpg"];
+  const randomImage = images[Math.floor(Math.random() * images.length)];
+  popup.src = `assets/images/${randomImage}`;
+
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  const maxWidth = screenWidth - 100;
+  const maxHeight = screenHeight - 100;
+
+  const x = Math.floor(Math.random() * (maxWidth < 0 ? 0 : maxWidth));
+  const y = Math.floor(Math.random() * (maxHeight < 0 ? 0 : maxHeight));
+
+  popup.style.left = `${x}px`;
+  popup.style.top = `${y}px`;
+  popup.style.width = "80px";
+  popup.style.height = "80px";
+
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.remove();
+  }, 65000);
+}
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+
+  const x = Math.random() * window.innerWidth;
+  heart.style.left = `${x}px`;
+  heart.style.bottom = "0";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 4000); // مدة ظهور القلب
+}
+
+// إطلاق القلوب كل 400ms
+setInterval(createHeart, 400);
+
+
+  function startPopups(count) {
+  let created = 0;
+  const interval = setInterval(() => {
+    if (created >= count) {
+      clearInterval(interval);
+
+      // ✅ عرض الرسالة بعد 3 ثواني من انتهاء الفقاعات
+      setTimeout(() => {
+        const finalMessage = document.getElementById("finalMessage");
+        if (finalMessage) {
+          finalMessage.style.display = "block";
+        } else {
+          console.error("❌ لم يتم العثور على عنصر finalMessage");
+        }
+      }, 3000);
+
+      return;
+    }
+
+    createPopup();
+    created++;
+  }, 30);
+
+  }
+
+  function enterFullscreen() {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+      elem.msRequestFullscreen();
+    }
+  }
+
+  document.addEventListener("click", function startExperience() {
+    dialog.style.display = "none";
+    audio.play().catch(error => {
+      console.log("Lỗi phát nhạc:", error);
+    });
+    enterFullscreen();
+    startPopups(200);
+    document.removeEventListener("click", startExperience);
+  });
+</script>
+</body>
+</html>
