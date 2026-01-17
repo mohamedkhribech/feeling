@@ -13,7 +13,8 @@ const CONFIG = {
         "photo1.png",
         "photo2.png",
         "photo3.jpg",
-        "photo4.jpg"
+        "photo4.jpg",
+        "photo5.jpg"
     ]
 };
 
