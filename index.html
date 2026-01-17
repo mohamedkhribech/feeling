@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Love Message</title>
+
+  <!-- Font Awesome for Icons (Optional/Future proofing) -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preload" href="assets/audio/music.mp3" as="audio">
+</head>
+
+<body>
+
+  <!-- Initial Interaction Dialog -->
+  <div id="startDialog" class="dialog">
+    <div class="content">
+      <p>Click on the screen</p>
+      <span>My dear kaoutar</span>
+    </div>
+  </div>
+
+  <!-- Final Message Dialog -->
+  <div id="finalMessage" class="dialog hidden" style="display: none;">
+    <div class="content">
+      <p>شكراً لأنك في حياتي. ممتن جدًا للتعرف عليك. أنتِ شخص مميز ولطيف جدًا 💖</p>
+    </div>
+  </div>
+
+  <audio id="backgroundMusic" src="assets/audio/music.mp3" loop></audio>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

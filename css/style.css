@@ -1,0 +1,237 @@
+:root {
+  --primary-color: #ff9a9e;
+  --secondary-color: #fad0c4;
+  --accent-color: #ffecd2;
+  --text-color: #fff;
+  --font-script: 'Great Vibes', cursive;
+  --font-body: 'Nunito', sans-serif;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--font-body);
+  /* Romantic Animated Gradient Background */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating Heart Animation */
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: rotate(45deg);
+  animation: floatUp 5s ease-in forwards;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: 0 0 5px rgba(255, 215, 225, 0.8);
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: inherit;
+  border-radius: 50%;
+  box-shadow: inherit;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: 0;
+    opacity: 0;
+    transform: scale(0.5) rotate(45deg);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    bottom: 100vh;
+    opacity: 0;
+    transform: scale(1.5) rotate(45deg) translateX(20px);
+  }
+}
+
+/* Image Popups - Polariod Style or Soft Glow */
+.popup {
+  position: absolute;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  animation: fadeOut 10s ease forwards;
+  object-fit: cover;
+  z-index: 10;
+  border: 4px solid white;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  10% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  90% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* Interactive Dialogs - Glassmorphism */
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  /* Glass Effect */
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  padding: 40px 50px;
+  text-align: center;
+  z-index: 1000;
+  max-width: 90%;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.dialog:hover {
+  transform: translate(-50%, -50%) scale(1.02);
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.25);
+}
+
+/* Typography in Dialogs */
+.dialog .content p {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.dialog .content span {
+  font-family: var(--font-script);
+  font-size: 3.5rem;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: block;
+}
+
+/* Hidden state utility */
+.hidden {
+  display: none !important;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  .dialog {
+    width: 85%;
+    padding: 30px;
+  }
+
+  .dialog .content span {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    height: 100dvh;
+  }
+
+  .dialog {
+    padding: 20px;
+    width: 90%;
+    border-radius: 15px;
+  }
+
+  .dialog .content p {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+
+  .dialog .content span {
+    font-size: 2rem;
+  }
+
+  .popup {
+    border: 2px solid white;
+  }
+}
+
+/* Heart Shape Mosaic Transition */
+.heart-shape-popup {
+  position: absolute;
+  width: 50px;
+  /* Smaller size for the mosaic */
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  /* Slightly squarer than round for mosaic feel */
+  border: 2px solid white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+  /* Smooth fly-in */
+  z-index: 100;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.heart-shape-popup.active {
+  opacity: 1;
+  transform: scale(1);
+}
