@@ -10,9 +10,10 @@ const CONFIG = {
     heartLifetime: 4000,
     mosaicCount: 60,      // Number of images in the final heart shape
     images: [
-        "heart.jpg",
-        "flower.jpg",
-        "love1.jpg"
+        "photo1.png",
+        "photo2.png",
+        "photo3.jpg",
+        "photo4.jpg"
     ]
 };
 
